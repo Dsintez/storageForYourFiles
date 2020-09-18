@@ -1,5 +1,6 @@
 package com.dsintez;
 
+import com.dsintez.model.ThreadHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,6 +30,15 @@ public class Controller implements Initializable {
         new Thread(threadHandler
                 .setPath(Paths.get(prePath, pathField.getText()))
                 .setCommand(ECommand.SEND)
+        ).start();
+        pathField.setText("");
+    }
+
+    public void receiveFile(ActionEvent actionEvent) {
+        if ("".equals(pathField.getText())) return;
+        new Thread(threadHandler
+                .setPath(Paths.get(prePath, pathField.getText()))
+                .setCommand(ECommand.RECEIVE)
         ).start();
         pathField.setText("");
     }
